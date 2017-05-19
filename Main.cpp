@@ -11,11 +11,12 @@ using namespace std;
 
 int menu();
 int menu2();
+void Reportes(vector<Obras>);
 
 int main(){
 	vector<Obras> olist;
 	vector<Obras> transferred;
-	string id, nombre, artista, fecha;
+	string id = "52c1fac589", nombre, artista, fecha;
 	bool salir = false;
 	while (!salir){
                 switch(menu()){
@@ -91,21 +92,51 @@ int main(){
 			};
 			
 			case 2:{//Eliminar
-			
+				int numero;
+				cout << "Ingrese la posición que desea eliminar: " << endl;
+				for (int i = 0; i < olist.size(); i++){
+					cout << i << " >>> " << olist[i].getNombre() << endl;
+				}
+				cin >> numero;
+				olist.erase(olist.begin() + numero);
+				cout << "Obra eliminada exitosamente";
 				break;
 			};
 			
 			case 3:{//Transferir Obras
-			
+				int numero;
+				cout << "Ingrese la posición que desea transferir: " << endl;
+				for (int i = 0; i < olist.size(); i++){
+					cout << i << " >>> " << olist[i].getNombre() << endl;
+				}
+				cin >> numero;
+				transferred.push_back(olist[numero]);
+				olist.erase(olist.begin() + numero);
+				cout << "Obra transferida exitosamente";
 				break;
 			};
 
 			case 4:{//Reportes
-			
+				Reportes(olist);
 				break;
 			};
 
-			case 5:{
+			case 5:{//Búsqueda
+				cout << "Ingrese el autor/artista que desea buscar: " << endl;
+				string artista;
+				cin >> artista;
+				for (int i = 0; i < olist.size(); ++i){
+					cout << "Obras del museo: " << endl;
+					if (olist.at(i).getArtista() == artista){
+						cout << "Nombre: " << olist.at(i).getNombre() << endl;
+					}
+					cout << endl;
+				}
+				cout << endl;
+				break;
+			};
+
+			case 6:{//Salir
                                 salir = true;
                                 break;
 			};
@@ -118,12 +149,13 @@ int menu(){
         int opcion;
         bool valido = true;
         do{
-                cout << "  MENU" << endl
+                cout << "     MENU" << endl
                 << "1.- Agregar Obra" << endl
 		<< "2.- Eliminar Obra" << endl
 		<< "3.- Transferir Obra" << endl
 		<< "4.- Reportes" << endl
-                << "5.- Salir" <<  endl;
+		<< "5.- Búsqueda" << endl
+                << "6.- Salir" <<  endl;
 
                 cout << "Ingrese una opción: ";
                 cin >> opcion;
@@ -159,3 +191,12 @@ int menu2(){
         return opcion;
 }
 
+void Reportes(vector<Obras> listaob) {
+	for (int i = 0; i < listaob.size(); i++){
+		cout << endl<<"Numero de obra: " << (i) << endl;
+		cout << endl<<"Nombre: " << listaob.at(i).getNombre() << endl;
+		cout << endl<<"ID de la obra: "<<listaob.at(i).getID() << endl;
+		cout << endl<<"Artista: "<<listaob.at(i).getArtista() << endl;
+		cout << endl<<"Fecha de ingreso: "<<listaob.at(i).getFecha() << endl;
+        }
+}

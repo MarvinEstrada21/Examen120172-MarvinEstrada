@@ -14,5 +14,9 @@ class Obras{
 	public:
 		Obras();
 		Obras(string, string, string, string);
+		string getNombre();
+		string getID();
+		string getArtista();
+		string getFecha();
 };
  
