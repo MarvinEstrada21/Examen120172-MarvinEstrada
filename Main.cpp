@@ -6,24 +6,28 @@
 #include "Disenos.h"
 #include <string>
 #include <vector>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sstream>
 
 using namespace std;
 
 int menu();
 int menu2();
 void Reportes(vector<Obras>);
+string IDAleatorio();
 
 int main(){
 	vector<Obras> olist;
 	vector<Obras> transferred;
-	string id = "52c1fac589", nombre, artista, fecha;
+	string nombre, artista, fecha;
 	bool salir = false;
 	while (!salir){
                 switch(menu()){
                         case 1:{
 				switch(menu2()){
 					case 1:{//Literatura
-						string genero, epoca;
+						string genero, epoca, id = IDAleatorio();
 						cout << "Ingrese el género literario: " << endl;
 						cin >> genero;
 						cout << "Ingrese la época: " << endl;
@@ -40,7 +44,7 @@ int main(){
 					};
 
 					case 2:{//Esculturas
-						string peso, material;
+						string peso, material, id = IDAleatorio();
 						cout << "Ingrese el peso: " << endl;
 						cin >> peso;
 						cout << "Ingrese el material con el que está hecho: " << endl;
@@ -57,7 +61,7 @@ int main(){
 					};
 
 					case 3:{//Pinturas
-						string material_lienzo, tecnica;
+						string material_lienzo, tecnica, id = IDAleatorio();
 						cout << "Ingrese el material del lienzo: " << endl;
 						cin >> material_lienzo;
 						cout << "Ingrese la técnica que se utilizó: " << endl;
@@ -74,7 +78,7 @@ int main(){
 					};
 
 					case 4:{//Diseños
-						string terreno;
+						string terreno, id = IDAleatorio();
 						cout << "Ingrese el terreno en donde está diseñada: " << endl;
 						cin >> terreno;
 						cout << "Ingrese el nombre: " << endl;
@@ -199,4 +203,30 @@ void Reportes(vector<Obras> listaob) {
 		cout << endl<<"Artista: "<<listaob.at(i).getArtista() << endl;
 		cout << endl<<"Fecha de ingreso: "<<listaob.at(i).getFecha() << endl;
         }
+}
+
+string IDAleatorio() {
+	int random;
+	stringstream aleat;
+	string aleat2;
+	for (int i = 0; i < 6; ++i){
+		random = rand() % 15 + 0;
+		if (random == 10){
+			aleat << "A";
+		} else if (random == 11){
+			aleat << "B";
+		} else if (random == 12){
+			aleat << "C";
+		} else if (random == 13){
+			aleat << "D";
+		} else if (random == 14){
+			aleat << "E";
+		} else if (random == 15){
+			aleat << "F";
+		} else {
+			aleat << random;
+		}
+	}
+	aleat2 = aleat.str();
+	return aleat2;
 }
